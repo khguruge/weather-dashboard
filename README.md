@@ -11,7 +11,7 @@ To set up the Weather App project, follow these steps:
 
 2. Navigate to the project directory:
     ```
-    cd weather-app
+    cd weather-dashboard
     ```
 
 3. Install dependencies using npm or pnpm:
