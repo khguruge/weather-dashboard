@@ -1,7 +1,5 @@
-import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import DashboardPage from './pages/DashboardPage';
-
 
 function App() {
   return (
@@ -10,7 +8,6 @@ function App() {
         <Route path="" element={<DashboardPage />} />
       </Routes>
     </BrowserRouter>
-
   )
 }
 
