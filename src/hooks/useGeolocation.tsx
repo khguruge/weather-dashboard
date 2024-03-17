@@ -1,14 +1,16 @@
-import { useState, useEffect } from 'react';
-import { LocationData, LocationDataError } from '../types/LocationData';
+import { useState, useEffect } from "react"
+import { LocationData } from "../types/LocationData"
 
 /**
  * Custom React hook to retrieve the user's geolocation.
- * @returns An object containing the user's location data and any error that occurred.
+ * @returns An object containing the user's location data
  */
-export const useGeolocation = (): { location: LocationData; error: LocationDataError } => {
-  // State variables to store location data and error
-  const [location, setLocation] = useState<LocationData>({ latitude: null, longitude: null });
-  const [error, setError] = useState<LocationDataError>(null);
+export const useGeolocation = (): { location: LocationData } => {
+  // State variables to store location data
+  const [location, setLocation] = useState<LocationData>({
+    latitude: null,
+    longitude: null,
+  })
 
   useEffect(() => {
     const getLocation = () => {
@@ -21,31 +23,28 @@ export const useGeolocation = (): { location: LocationData; error: LocationDataE
               // Set the location state with the retrieved coordinates
               setLocation({
                 latitude: position.coords.latitude,
-                longitude: position.coords.longitude
-              });
+                longitude: position.coords.longitude,
+              })
             }
           },
           // Error callback
           (err: GeolocationPositionError) => {
-            // Set the error state with the error message
-            setError(err.message);
+            console.log("Somethng went wrong", err.message)
           }
-        );
+        )
       } else {
-        // Set an error message if Geolocation API is not supported
-        setError('Geolocation is not supported by this browser.');
+        console.log("Geolocation is not supported by this browser.")
       }
-    };
+    }
 
-    getLocation();
+    getLocation()
 
     // Cleanup function to reset state when the component unmounts or re-renders
     return () => {
-      setLocation({ latitude: null, longitude: null });
-      setError(null);
-    };
-  }, []);
+      setLocation({ latitude: null, longitude: null })
+    }
+  }, [])
 
-  // Return the location data and error
-  return { location, error };
-};
+  // Return the location data
+  return { location }
+}
